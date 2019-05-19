@@ -1,0 +1,10 @@
+/;2;-500;-308;0-out;1-out;6-in1;None
+*;5;-497;-112;3-out;4-out;6-in2;None
++;6;-257;-211;2-out;5-out;8-in1;None
+-;8;-113;-25;6-out;9-out;10-in1;None
+in;0;-734;-322;None;None;2-in1;9
+in;1;-736;-231;None;None;2-in2;7
+in;3;-739;-127;None;None;5-in1;8
+in;4;-737;-32;None;None;5-in2;20
+in;9;-395;102;None;None;8-in2;14
+out;10;-29;-155;8-out;None;None;None

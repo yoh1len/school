@@ -1,0 +1,6 @@
+-;2;-165;-161;0-out;1-out;3-in1;None
+*;3;79;-157;2-out;4-out;5-in1;None
+in;0;-423;-207;None;None;2-in1;5
+in;1;-432;-92;None;None;2-in2;10
+in;4;-143;83;None;None;3-in2;6
+out;5;180;35;3-out;None;None;None
