@@ -1,0 +1,41 @@
+Meno: Ivan Eštvan
+Dátum: 20.11.2017
+
+Popis aplikácie:
+
+Aplikácia slúží ako jednoduchý POP3 server. Dokáže komunikovať s viac uživateľmi, ale autorizovaný môže byť len jeden. 
+Neimplementuje prípadne prijatie nového mailu počas prihlásenia uživateľa. 
+Na komunikáciu medzi klientom a serverom používa neblokujúci socket. 
+
+Príkazy od klienta, ktoré aplikácia akceptuje:
+
+USER, PASS, APOP, QUIT - počas autorizačnej fázy
+STAT, LIST, UIDL, RETR, RSET, NOOP, DELE a QUIT - počas transakčnej fázy
+
+Aplikácia tiež akceptuje príkaz TOP vrámci rozšírenia.
+
+
+
+
+Spustenie aplikácie:
+
+./popser [-h] [-a PATH] [-c] [-p PORT] [-d PATH] [-r]
+
+	-h	- voliteľný parameter, vypíše nápovedu, ak je zadaný spolu s ostatnými, tak vypíše nápovedu a ukončí beh programu
+	-c 	- voliteľný parameter, ak je zadaný tak sa ako autorizačná metóda používa dvojica príkazov USER/PASS, inak sa používa APOP
+		- musí byť zadaný minimálne spolu s -a, -p, -d
+	-r 	- voliteľný parameter, vráti všetko do stavu pred prvým spustením serveru
+		- môže byť zadaný samostatne
+		- ak je zadaný minimálne spolu s -a, -p, -d, tak najprv vráti server do pôvodneho stavu a potom následuje zapnutie serveru
+	-a	- povinný parameter pre spustenie serveru, PATH obsahuje cestu do súboru s autorizačnými údajmi
+	-p  - povinný parameter pre spustenie serveru, PORT je číslo portu, na ktorom bude server pracovať
+	-d	- povinný parameter pre spustenie serveru, PATH obsahuje cestu do zložky Maildir
+	
+Odovzdané súbory:
+
+Makefile
+manual.pdf
+README
+popser.cpp
+md5.cpp
+md5.h

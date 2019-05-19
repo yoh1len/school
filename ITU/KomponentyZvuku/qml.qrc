@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Page1.qml</file>
+        <file>Page1Form.ui.qml</file>
+        <file>MyHeader.qml</file>
+        <file>MyHeaderForm.ui.qml</file>
+        <file>noimage.png</file>
+        <file>MyContent.qml</file>
+        <file>MyContentForm.ui.qml</file>
+        <file>1479753408_Open.png</file>
+        <file>1479754937_129_ArrowRight.png</file>
+        <file>1479754940_127_ArrowLeft.png</file>
+        <file>floppy_disk_save-128.png</file>
+        <file>ic_play_arrow_48px-128.png</file>
+        <file>ic_stop_48px-128.png</file>
+        <file>media-record-128.png</file>
+        <file>Pause_Icon-128.png</file>
+        <file>1479773331_microphone.png</file>
+        <file>1479773690_seo-social-web-network-internet_150.png</file>
+        <file>1479774863_content-cut.png</file>
+        <file>MyAudioView.qml</file>
+        <file>MyAudioViewForm.ui.qml</file>
+        <file>1479858088_add.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,93 @@
+#!/bin/bash
+
+FILE_ERE="*"
+noreg="1"
+case "$#" in
+	1)cd "$1"
+	  noreg="0";;
+	2)if [ "$1" = "-i" ];
+	  then 
+		FILE_ERE=$2
+		noreg="1"
+ 	  fi;;
+
+	3)cd "$3"
+	  if [ "$1" = "-i" ];
+	  then
+		FILE_ERE=$2
+		noreg="0"
+          fi;;
+esac
+
+DIR=`pwd`
+DD="$(find . -type d -ls |egrep -v [$FILE_ERE]|sort -n | tail -1| awk '{print $11}'| grep -o "/"|wc -l)"
+DD="$(($DD+1))"
+NF="$(find . -type f | egrep -v [$FILE_ERE]|wc -l)"
+ND="$(find . -type d | egrep -v [$FILE_ERE]|wc -l)"
+AF="$(($NF / $ND))" 
+LF="$(find . -type f -ls | egrep -v [$FILE_ERE]|awk '{print $7}'|sort -n|tail -1|awk '{print $1}')"
+SUM_SIZE="$(find . -type f -ls | egrep -v [$FILE_ERE]| awk '{x += $7} END {print x}')"
+EL="$(find . -type f |egrep -v [$FILE_ERE]|awk -F . '{print $NF}'|sort | uniq -c | awk '{printf $2","}')"
+count="$(find . -type f |egrep -v [$FILE_ERE]|awk -F . '{print $NF}'|sort | uniq -c| awk '{print $2}'|wc -l)"
+
+if [ "$NF" = "0" ];
+then
+	LF="N/A"
+	AS="N/A"
+	MS="N/A"
+else
+	AS="$(($SUM_SIZE / $NF))"
+	MS="$(find . -type f -ls | egrep -v [$FILE_ERE]|sort -n | awk '{array[NR]=$7}
+   END { if (NR%2==1) print array[(NR+1)/2]; else print (array[NR/2]+array[NR/2+1])/2}')"
+
+fi
+
+echo "Root directory: $DIR"
+echo "Directories: $ND"
+echo "Max depth: $DD"
+echo "Average no. of files: $AF"
+echo "All files: $NF"
+echo "	Largest file: $LF"
+echo "	Average file size: $AS"
+echo "	File size median: $MS"
+
+if [ $noreg = 1 ];
+then
+EL="$(echo ${EL%?} | cut -c 10-)"
+count="$(( $count - 1))"
+fi
+
+if [ $noreg = 0 ];
+then
+EL="$(echo ${EL%?})"
+fi
+
+
+if [ $count != 0 ];
+then
+	
+	echo "File extensions: ${EL}"
+fi
+
+i="1"
+while [ $i -le $count ] 
+do
+
+	EXT="$(echo $EL|cut -d"," -f"$i")"
+	NEXT="$(find . -type f | egrep -v [$FILE_ERE]|grep "\.$EXT"|wc -l)"
+	LEXT="$(find . -type f -ls |egrep -v [$FILE_ERE]|grep "\.$EXT"|awk '{print $7}'|sort -n|tail -1|awk '{print $1}')"
+	SUM_SIZE="$(find . -type f -ls | egrep -v [$FILE_ERE]|grep "\.$EXT"| awk '{x += $7} END {print x}')"
+	AEXT="$(($SUM_SIZE / $NEXT))"
+	MEXT="$(find . -type f -ls | egrep -v [$FILE_ERE]|grep "\.$EXT"| sort -n | awk '{array[NR]=$7}
+   END { if (NR%2==1) print array[(NR+1)/2]; else print (array[NR/2]+array[NR/2+1])/2}')"
+	echo "Files .$EXT: $NEXT"
+	echo "	Largest file .$EXT: $LEXT"
+	echo "	Average file .$EXT: $AEXT"
+	echo "	File size median .$EXT: $MEXT"
+	i="$(( $i + 1 ))"
+done
+
+
+
+
+
